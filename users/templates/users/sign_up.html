@@ -1,0 +1,32 @@
+{% extends "users/layout.html" %}
+{% load static %}
+
+
+{% block stylesheet %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static 'users/css/sign_up.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="sign-up">
+<form class="form-signin" method="POST">
+    {% csrf_token %}
+    <h1 class="h3 mb-3 font-weight-normal">Please sign up</h1>
+
+    {{ form.non_field_errors }}
+    {% for field in form %}
+        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+        {{ field }}
+        {{ field.errors }}
+    {% endfor %}
+
+    <div class="checkbox mb-3">
+      <label>
+        <input type="checkbox" value="remember-me"> Remember me
+      </label>
+    </div>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    <p class="mt-5 mb-3 text-muted">© 2017-2019</p>
+  </form>
+</div>
+{% endblock %}
